@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Neha's Bakery, Pune. Customised cakes, brownies, cookies and desserts made to order. Unofficial website demo.">
+<meta name="theme-color" content="#24170f">
+<title>Neha's Bakery, Pune | Unofficial website demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* ---------- Design tokens ----------
+   Temporary palette chosen for this concept. It is not the bakery's official brand palette. */
+:root{
+  --cocoa:#24170f;
+  --cocoa-2:#321f15;
+  --ivory:#fbf7f1;
+  --linen:#f1e8dc;
+  --sand:#e6d6c3;
+  --ink:#2a1d16;
+  --muted:#6e6057;
+  --berry:#7c2f3d;
+  --berry-deep:#5e2230;
+  --caramel:#b68458;
+  --line:#e5d9ca;
+  --radius:4px;
+  --serif:'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans:'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --header-h:72px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ivory);color:var(--ink);font:400 16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--caramel);outline-offset:3px}
+section[id]{scroll-margin-top:calc(var(--header-h) + 12px)}
+[hidden]{display:none !important}
+
+.container{width:min(1180px, 100% - 40px);margin-inline:auto}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ivory);color:var(--ink);padding:10px 14px;z-index:100}
+.skip:focus{top:12px}
+
+/* ---------- Type ---------- */
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.08;letter-spacing:-.02em;font-variation-settings:"opsz" 144}
+h1{font-size:clamp(46px, 6.6vw, 92px)}
+h2{font-size:clamp(36px, 4.2vw, 56px)}
+h3{font-size:clamp(24px, 2.2vw, 30px);letter-spacing:-.01em}
+p{margin:0}
+.lede{font-size:clamp(17px, 1.5vw, 19px);line-height:1.7;max-width:50ch}
+.kicker{font-size:14px;font-weight:600;color:var(--caramel);letter-spacing:.02em}
+.small{font-size:14px;color:var(--muted)}
+
+/* ---------- Buttons & links ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;background:var(--berry);color:#fff;border-radius:999px;font-size:15px;font-weight:600;transition:background .25s ease, transform .25s ease;border:0;cursor:pointer}
+.btn:hover{background:var(--berry-deep);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 1px currentColor}
+.btn-ghost:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
+.btn-small{min-height:42px;padding:0 18px;font-size:14px}
+.text-link{font-weight:600;color:var(--berry);font-size:15px;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s ease;padding-bottom:2px}
+.text-link:hover{background-size:100% 1px}
+
+/* ---------- Announcement + header ---------- */
+.announce{background:var(--cocoa);color:#e9d9c5;text-align:center;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:9px 16px}
+.announce span{color:#f0cfa4}
+.site-header{position:sticky;top:0;z-index:50;background:rgba(251,247,241,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s ease, box-shadow .3s ease}
+.site-header.is-scrolled{border-color:var(--line);box-shadow:0 10px 30px -22px rgba(36,23,15,.35)}
+.header-inner{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.monogram{width:44px;height:44px;border-radius:50%;border:1px solid var(--berry);color:var(--berry);display:grid;place-items:center;font-family:var(--serif);font-size:22px;font-style:italic;flex:none}
+.brand-text{font-family:var(--serif);font-size:22px;line-height:1.05;font-weight:500}
+.brand-text small{display:block;font:500 13px var(--sans);color:var(--muted);margin-top:3px}
+.desk-nav{display:flex;gap:30px;font-size:15px;font-weight:500}
+.desk-nav a{position:relative;padding:4px 0}
+.desk-nav a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--berry);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.desk-nav a:hover::after{transform:scaleX(1)}
+.header-cta{display:flex;align-items:center;gap:14px}
+.menu-toggle{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:transparent;cursor:pointer;position:relative}
+.menu-toggle span{position:absolute;left:12px;right:12px;height:1.5px;background:var(--ink);transition:transform .3s ease, opacity .2s ease}
+.menu-toggle span:nth-child(1){top:16px}
+.menu-toggle span:nth-child(2){top:21px}
+.menu-toggle span:nth-child(3){top:26px}
+.menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+.mobile-nav{border-top:1px solid var(--line);background:var(--ivory);padding:12px 0 24px}
+.mobile-nav a.m-link{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:18px;font-family:var(--serif)}
+.mobile-nav .btn{width:100%;margin-top:20px}
+.mobile-nav .m-ig{display:block;text-align:center;margin-top:14px;font-weight:600;color:var(--berry)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;background:var(--cocoa);color:var(--ivory);overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 55% at 72% 46%, rgba(184,132,88,.22), transparent 70%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;min-height:min(78vh, 760px);padding:clamp(56px, 9vw, 110px) 0}
+.hero h1{margin:18px 0 26px;color:var(--ivory)}
+.hero .lede{color:#d9c8b5}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.hero-meta{margin-top:26px;font-size:14px;color:#bfa893}
+.hero-art{position:relative;aspect-ratio:1/1;max-width:560px;width:100%;justify-self:center;display:grid;place-items:center}
+.hero-art::before{content:"";position:absolute;inset:8% 6%;border-radius:50% 50% 8px 8px;border:1px solid rgba(233,217,197,.18)}
+.hero-cake{width:86%;height:auto;animation:rise 1.4s cubic-bezier(.2,.7,.2,1) both .15s;filter:drop-shadow(0 30px 30px rgba(0,0,0,.35));--sponge:#8b5a3c;--filling:#4a2a1c;--icing:#5b3623;--top:#d9b38c;--plate:#3a2a20}
+.hero-copy > *{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+.hero-copy > *:nth-child(1){animation-delay:.05s}
+.hero-copy > *:nth-child(2){animation-delay:.12s}
+.hero-copy > *:nth-child(3){animation-delay:.2s}
+.hero-copy > *:nth-child(4){animation-delay:.28s}
+.hero-copy > *:nth-child(5){animation-delay:.36s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ---------- Shared sections ---------- */
+.section{padding:clamp(72px, 10vw, 128px) 0}
+.section-head{display:grid;gap:16px;max-width:640px;margin-bottom:clamp(40px, 5vw, 60px)}
+.section-head p{color:var(--muted)}
+.tint{background:var(--linen)}
+
+/* ---------- Cake art (shared symbol) ---------- */
+.cake-art{width:100%;height:auto;--sponge:#d9a77a;--filling:#7a4330;--icing:#f4e9df;--top:#a8323e}
+
+/* ---------- About ---------- */
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(40px, 7vw, 96px);align-items:center}
+.about-panel{aspect-ratio:4/5;background:var(--sand);border-radius:200px 200px var(--radius) var(--radius);display:grid;place-items:center;text-align:center;padding:40px;position:relative;overflow:hidden}
+.about-panel .mono-big{font-family:var(--serif);font-style:italic;font-size:clamp(120px, 16vw, 200px);line-height:.9;color:var(--berry);font-weight:400}
+.about-panel p{position:absolute;bottom:34px;left:0;right:0;font-size:14px;color:var(--muted)}
+.about-copy{display:grid;gap:22px}
+.about-copy p.body{color:var(--muted);max-width:60ch}
+.about-copy .signature-line{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--berry)}
+
+/* ---------- Signature cards ---------- */
+.cards-3{display:grid;grid-template-columns:repeat(3, 1fr);gap:clamp(18px, 2.4vw, 32px)}
+.product{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:transform .4s ease, box-shadow .4s ease}
+.product:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(36,23,15,.35)}
+.product-media{position:relative;aspect-ratio:5/4;background:var(--bg,var(--linen));display:grid;place-items:center;overflow:hidden}
+.product-media .cake-art{width:72%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.product:hover .product-media .cake-art{transform:scale(1.04) translateY(-3px)}
+.product-media img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.product-body{padding:24px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.product-body p{color:var(--muted);font-size:15px}
+.product-foot{margin-top:auto;padding-top:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);font-size:14px}
+.price-note{color:var(--muted)}
+
+/* ---------- Full menu ---------- */
+.menu-cols{display:grid;grid-template-columns:repeat(2, 1fr);gap:clamp(40px, 6vw, 80px)}
+.menu-group h3{font-size:26px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--ink)}
+.menu-list{list-style:none;margin:0;padding:0}
+.menu-list li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.menu-list .item-name{font-family:var(--serif);font-size:20px;line-height:1.25}
+.menu-list .item-note{display:block;font:400 14px var(--sans);color:var(--muted);margin-top:4px}
+.menu-list a{flex:none;font-size:14px;font-weight:600;color:var(--berry);padding:6px 0;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s ease}
+.menu-list a:hover{background-size:100% 1px}
+.menu-foot{margin-top:36px;font-size:14px;color:var(--muted);max-width:70ch}
+
+/* ---------- Occasions ---------- */
+.occasion-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:clamp(16px, 2vw, 28px)}
+.occasion{border-top:1px solid var(--ink);padding-top:24px;display:grid;gap:14px;align-content:start}
+.occasion .cake-art{width:70%;margin:0 0 6px;--bg:transparent}
+.occasion p{color:var(--muted)}
+
+/* ---------- Gallery ---------- */
+.gallery-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:clamp(12px, 1.6vw, 20px)}
+.tile{position:relative;aspect-ratio:1/1;border-radius:6px;overflow:hidden;background:var(--bg,var(--linen));display:grid;place-items:center}
+.tile .cake-art{width:66%;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.tile:hover .cake-art{transform:scale(1.06) rotate(-1.5deg)}
+.tile img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.tile:hover img.photo{transform:scale(1.04)}
+.tile-cta{background:var(--cocoa);color:var(--ivory);display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:clamp(20px, 3vw, 32px);text-align:left}
+.tile-cta h3{font-size:clamp(24px, 2.6vw, 34px);color:var(--ivory)}
+.tile-cta p{color:#cdb9a5;font-size:15px}
+.tile-cta .text-link{color:#f0cfa4}
+.gallery-foot{margin-top:28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+
+/* ---------- Custom enquiry ---------- */
+.custom-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px, 7vw, 96px);align-items:start}
+.custom-copy{display:grid;gap:20px}
+.custom-copy p{color:var(--muted);max-width:52ch}
+.enquiry{background:#fff;border:1px solid var(--line);border-radius:6px;padding:clamp(24px, 3.4vw, 40px);display:grid;gap:18px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:grid;gap:8px}
+.field label{font-size:14px;font-weight:600}
+.field .opt{font-weight:400;color:var(--muted)}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--ivory);border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;min-height:48px;transition:border-color .2s ease, box-shadow .2s ease;-webkit-appearance:none;appearance:none}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 20px) 22px,calc(100% - 15px) 22px;background-size:5px 5px;background-repeat:no-repeat;padding-right:40px}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--berry);box-shadow:0 0 0 3px rgba(124,47,61,.14)}
+.enquiry .btn{width:100%}
+.enquiry .fine{font-size:13px;color:var(--muted)}
+
+/* ---------- Contact ---------- */
+.contact{background:var(--cocoa);color:var(--ivory);padding:clamp(72px, 9vw, 110px) 0}
+.contact h2{color:var(--ivory)}
+.contact .section-head p{color:#cdb9a5}
+.contact-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:0;border-top:1px solid rgba(233,217,197,.2);border-bottom:1px solid rgba(233,217,197,.2)}
+.contact-item{padding:32px 28px;display:grid;gap:10px;align-content:start}
+.contact-item + .contact-item{border-left:1px solid rgba(233,217,197,.2)}
+.contact-item .label{font-size:14px;color:#bfa893}
+.contact-item strong{font-family:var(--serif);font-weight:400;font-size:clamp(20px, 2vw, 26px);line-height:1.25}
+.contact-item a{font-weight:600;color:#f0cfa4;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s ease;justify-self:start}
+.contact-item a:hover{background-size:100% 1px}
+.contact-actions{margin-top:44px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.contact-actions .btn-ghost{color:var(--ivory)}
+
+/* ---------- Footer ---------- */
+.site-footer{padding:56px 0 40px;background:var(--ivory)}
+.footer-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid var(--line)}
+.footer-brand{display:flex;gap:14px;align-items:center}
+.footer-brand p{color:var(--muted);font-size:15px;max-width:34ch}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap;align-content:start;font-size:15px;font-weight:500}
+.footer-links a:hover{color:var(--berry)}
+.footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:24px;font-size:13px;color:var(--muted)}
+.footer-bottom .demo-note{font-weight:700;color:var(--berry);letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+.credit{font-style:italic;font-family:var(--serif);font-size:15px}
+.credit a{color:var(--berry);font-style:normal;font-family:var(--sans);font-weight:600}
+
+
+/* ---------- Products & pricing ---------- */
+.menu-category{margin-top:clamp(40px, 5vw, 64px)}
+.menu-category:first-of-type{margin-top:0}
+.category-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:24px}
+.category-head h3{font-size:clamp(26px, 3vw, 34px)}
+.category-head span{font-size:14px;color:var(--muted)}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:clamp(16px, 2.2vw, 28px)}
+.product-body h4.product-name{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;letter-spacing:-.01em;margin:0}
+.product-body .status{font-size:13px;font-weight:600;color:var(--caramel);margin:0}
+.product-media .media-tag{position:absolute;left:12px;bottom:12px;background:rgba(251,247,241,.92);color:var(--muted);font-size:12px;padding:4px 10px;border-radius:999px;z-index:1}
+.product-media .cookie-art{width:62%;height:auto;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.product:hover .product-media .cookie-art{transform:scale(1.04) rotate(-3deg)}
+.product-foot .btn{min-height:42px}
+.verify-note{margin-top:clamp(44px, 6vw, 72px);border-left:2px solid var(--berry);padding:6px 0 6px 22px;display:grid;gap:10px;max-width:78ch}
+.verify-note p{font-size:14px;color:var(--muted);line-height:1.7}
+.verify-note strong{color:var(--ink)}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px){
+  .desk-nav{gap:22px;font-size:14px}
+  .hero-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .cards-3{grid-template-columns:1fr 1fr}
+  .cards-3 .product:last-child{grid-column:1 / -1}
+  .occasion-grid{grid-template-columns:1fr 1fr}
+  .occasion:last-child{grid-column:1 / -1}
+}
+@media (max-width: 860px){
+  :root{--header-h:64px}
+  .desk-nav,.header-cta{display:none}
+  .menu-toggle{display:block}
+  .hero-grid{grid-template-columns:1fr;text-align:left;min-height:0}
+  .hero-art{max-width:440px;order:-1;margin-bottom:8px}
+  .about-grid,.custom-grid{grid-template-columns:1fr}
+  .about-panel{aspect-ratio:16/11;border-radius:160px 160px var(--radius) var(--radius)}
+  .menu-cols{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid .tile-cta{grid-column:1 / -1;aspect-ratio:auto;min-height:220px}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-item + .contact-item{border-left:0;border-top:1px solid rgba(233,217,197,.2)}
+}
+@media (max-width: 600px){
+  .container{width:min(100% - 32px, 1180px)}
+  .cards-3,.occasion-grid{grid-template-columns:1fr}
+  .cards-3 .product:last-child,.occasion:last-child{grid-column:auto}
+  .field-row{grid-template-columns:1fr}
+  .hero-actions .btn{flex:1 1 100%}
+  .gallery-grid{gap:10px}
+  .footer-top{flex-direction:column}
+}
+@media (max-width: 380px){
+  .brand-text{font-size:19px}
+  .monogram{width:38px;height:38px;font-size:19px}
+}
+
+/* ---------- Motion preferences ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- Shared cake illustration. Colours come from --sponge, --filling, --icing, --top and --plate on each use.
+     Replace with bakery photography once you have verified images (see the README note in the reply). -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="cake" viewBox="0 0 240 200">
+      <ellipse cx="120" cy="180" rx="108" ry="13" fill="var(--plate, #e6dcd0)"/>
+      <rect x="42" y="92" width="156" height="86" rx="6" fill="var(--sponge, #d9a77a)"/>
+      <rect x="42" y="122" width="156" height="12" fill="var(--filling, #7a4330)"/>
+      <path d="M42 92 Q54 118 66 92 Q78 110 90 92 Q102 120 114 92 Q126 108 138 92 Q150 120 162 92 Q174 110 186 92 Q196 116 198 92 Z" fill="var(--icing, #f4e9df)"/>
+      <ellipse cx="120" cy="92" rx="78" ry="12" fill="var(--icing, #f4e9df)"/>
+      <circle cx="74" cy="82" r="6" fill="var(--top, #a8323e)"/>
+      <circle cx="120" cy="78" r="6" fill="var(--top, #a8323e)"/>
+      <circle cx="166" cy="82" r="6" fill="var(--top, #a8323e)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="announce" role="note"><span>Unofficial website demo</span> · Not the official website of Neha's Bakery</div>
+
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="Neha's Bakery, back to top">
+      <span class="monogram" aria-hidden="true">N</span>
+      <span class="brand-text">Neha's Bakery<small>Pune, Maharashtra</small></span>
+    </a>
+    <nav class="desk-nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#occasions">Occasions</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#custom">Custom cakes</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn-small" href="https://wa.me/919604799693?text=Hi%20Neha%27s%20Bakery%2C%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
+    </div>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden>
+    <div class="container">
+      <a class="m-link" href="#about">About</a>
+      <a class="m-link" href="#menu">Full menu</a>
+      <a class="m-link" href="#occasions">Occasions</a>
+      <a class="m-link" href="#gallery">Gallery</a>
+      <a class="m-link" href="#custom">Custom cakes</a>
+      <a class="m-link" href="#contact">Contact</a>
+      <a class="btn" href="https://wa.me/919604799693?text=Hi%20Neha%27s%20Bakery%2C%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
+      <a class="m-ig" href="https://www.instagram.com/nehasbakery/" target="_blank" rel="noopener">Follow @nehasbakery on Instagram</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">Customised cakes and desserts · Pune</p>
+      <h1>Cakes made around the moment you're celebrating.</h1>
+      <p class="lede">Birthday cakes, anniversary cakes, brownies, cookies and desserts, shaped around your occasion, flavour and guest count. Share your idea and we'll plan it together.</p>
+      <div class="hero-actions">
+        <a class="btn" href="https://wa.me/919604799693?text=Hi%20Neha%2C%20I%27d%20like%20to%20discuss%20a%20cake%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
+        <a class="btn btn-ghost" href="#menu">View the menu</a>
+      </div>
+      <p class="hero-meta">Prices are confirmed on enquiry.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg class="cake-art hero-cake" viewBox="0 0 240 200"><use href="#cake"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="about-panel" aria-hidden="true">
+      <div class="mono-big">N</div>
+      <p>Neha Bhalotia, owner · Pune</p>
+    </div>
+    <div class="about-copy">
+      <p class="kicker">About the bakery</p>
+      <h2>A small bakery in Pune, with every cake made to order.</h2>
+      <p class="body">Neha's Bakery is run by Neha Bhalotia in Pune. Each order starts with a conversation about the occasion, the number of guests, the flavours you love and the look you have in mind. From there, each cake is planned and baked for that one celebration.</p>
+      <p class="body">Ask about eggless and other dietary options when you enquire. Choices for each order are confirmed directly with the bakery.</p>
+      <p class="signature-line">Made with care, for your moments.</p>
+      <div><a class="text-link" href="https://www.instagram.com/nehasbakery/" target="_blank" rel="noopener">See the bakery on Instagram ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS & PRICING ============ -->
+<section class="section tint" id="menu">
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker">Products and pricing</p>
+      <h2>What's on the menu.</h2>
+      <p>Product names come from the bakery's public Swiggy menu, linked from its Linktree. Prices are not publicly listed, so every item is priced on enquiry. Availability can change, so confirm on WhatsApp before ordering.</p>
+    </div>
+
+    <div class="menu-category">
+      <div class="category-head"><h3>Cakes</h3><span>2 listed items</span></div>
+      <div class="product-grid">
+      <article class="product">
+        <div class="product-media" style="--bg:#efe4d6">
+          <svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#d2a574;--filling:#f2eae0;--icing:#f7f0e6;--top:#6b4129;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg>
+          <span class="media-tag">Illustration</span>
+        </div>
+        <div class="product-body">
+          <p class="status">Listed on Swiggy. Current availability unconfirmed.</p>
+          <h4 class="product-name">Tiramisu</h4>
+          <p>Listed as a 250 g tub on the bakery's Swiggy menu.</p>
+          <div class="product-foot">
+            <span class="price-note">Contact for Price</span>
+            <a class="btn btn-small" href="https://wa.me/919604799693?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20Tiramisu%20%28250%20g%29." target="_blank" rel="noopener">Enquire on WhatsApp</a>
+          </div>
+        </div>
+      </article>
+      <article class="product">
+        <div class="product-media" style="--bg:#f1e6d6">
+          <svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#e8c9a0;--filling:#f3e1c4;--icing:#f9efe2;--top:#3b2418;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg>
+          <span class="media-tag">Illustration</span>
+        </div>
+        <div class="product-body">
+          <p class="status">Listed on Swiggy. Current availability unconfirmed.</p>
+          <h4 class="product-name">Choco Chip Butter Cake</h4>
+          <p>Listed among the bakery's popular dishes on Swiggy.</p>
+          <div class="product-foot">
+            <span class="price-note">Contact for Price</span>
+            <a class="btn btn-small" href="https://wa.me/919604799693?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20the%20Choco%20Chip%20Butter%20Cake." target="_blank" rel="noopener">Enquire on WhatsApp</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <div class="category-head"><h3>Brownies</h3><span>1 listed item</span></div>
+      <div class="product-grid">
+      <article class="product">
+        <div class="product-media" style="--bg:#ecdfd2">
+          <svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#5a3524;--filling:#3b2318;--icing:#2e1b12;--top:#7a4d35;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg>
+          <span class="media-tag">Illustration</span>
+        </div>
+        <div class="product-body">
+          <p class="status">Listed on Swiggy. Current availability unconfirmed.</p>
+          <h4 class="product-name">Chocolate Brownie</h4>
+          <p>Listed as a best-selling dish on Swiggy.</p>
+          <div class="product-foot">
+            <span class="price-note">Contact for Price</span>
+            <a class="btn btn-small" href="https://wa.me/919604799693?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20the%20Chocolate%20Brownie." target="_blank" rel="noopener">Enquire on WhatsApp</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <div class="category-head"><h3>Cookies</h3><span>1 listed item</span></div>
+      <div class="product-grid">
+      <article class="product">
+        <div class="product-media" style="--bg:#f1e6d6">
+          <svg class="cookie-art" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="78" fill="#d9b48a"/><circle cx="100" cy="100" r="70" fill="#e4c39c"/><ellipse cx="72" cy="78" rx="9" ry="7" fill="#3b2418"/><ellipse cx="118" cy="70" rx="9" ry="7" fill="#3b2418"/><ellipse cx="96" cy="108" rx="9" ry="7" fill="#3b2418"/><ellipse cx="134" cy="112" rx="9" ry="7" fill="#3b2418"/><ellipse cx="70" cy="124" rx="9" ry="7" fill="#3b2418"/><ellipse cx="112" cy="140" rx="9" ry="7" fill="#3b2418"/><ellipse cx="146" cy="84" rx="9" ry="7" fill="#3b2418"/></svg>
+          <span class="media-tag">Illustration</span>
+        </div>
+        <div class="product-body">
+          <p class="status">Listed on Swiggy. Current availability unconfirmed.</p>
+          <h4 class="product-name">Millet Double Chocolate Chip Cookie</h4>
+          <p>Listed as a best-selling dish on Swiggy.</p>
+          <div class="product-foot">
+            <span class="price-note">Contact for Price</span>
+            <a class="btn btn-small" href="https://wa.me/919604799693?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20the%20Millet%20Double%20Chocolate%20Chip%20Cookie." target="_blank" rel="noopener">Enquire on WhatsApp</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <div class="category-head"><h3>Custom orders</h3><span>Quoted per enquiry</span></div>
+      <div class="product-grid">
+      <article class="product">
+        <div class="product-media" style="--bg:#f1e3e0">
+          <svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#f0c9a8;--filling:#e89fa0;--icing:#fbf1e8;--top:#c2415a;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg>
+          <span class="media-tag">Illustration</span>
+        </div>
+        <div class="product-body">
+          <p class="status">Available on enquiry</p>
+          <h4 class="product-name">Custom celebration cakes</h4>
+          <p>The bakery's Linktree describes its offer as eggless customised cakes and desserts. Designs are quoted per enquiry.</p>
+          <div class="product-foot">
+            <span class="price-note">Contact for Price</span>
+            <a class="btn btn-small" href="https://wa.me/919604799693?text=Hi%20Neha%2C%20I%27d%20like%20to%20enquire%20about%20a%20customised%20cake." target="_blank" rel="noopener">Enquire on WhatsApp</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+
+    <div class="verify-note">
+      <p><strong>Verified:</strong> product names and the custom-cake offer, from the bakery's Swiggy menu page and Linktree profile.</p>
+      <p><strong>Not verified:</strong> prices, product photos, and current availability. Pastries, cheesecakes and other bakery items are not shown because we could not confirm them in any public listing. Instagram and Zomato could not be checked automatically.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OCCASIONS ============ -->
+<section class="section tint" id="occasions">
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker">Special occasions</p>
+      <h2>For the days that deserve a cake.</h2>
+      <p>Birthdays, anniversaries and everything in between. Tell the bakery what you're celebrating and who it's for.</p>
+    </div>
+    <div class="occasion-grid">
+      <div class="occasion">
+        <svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#f0c9a8;--filling:#e89fa0;--icing:#fbf1e8;--top:#c2415a;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg>
+        <h3>Birthdays</h3>
+        <p>Themed designs, kids' favourites and grown-up flavours for every age.</p>
+        <a class="text-link" href="https://wa.me/919604799693?text=Hi%20Neha%2C%20I%27d%20like%20a%20birthday%20cake." target="_blank" rel="noopener">Plan a birthday cake</a>
+      </div>
+      <div class="occasion">
+        <svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#e4c3a0;--filling:#f6e6d8;--icing:#f9f1ea;--top:#8f2f3c;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg>
+        <h3>Anniversaries</h3>
+        <p>An elegant cake for two, with flavours and details chosen for your story together.</p>
+        <a class="text-link" href="https://wa.me/919604799693?text=Hi%20Neha%2C%20I%27d%20like%20an%20anniversary%20cake." target="_blank" rel="noopener">Plan an anniversary cake</a>
+      </div>
+      <div class="occasion">
+        <svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#c99a6e;--filling:#7a4330;--icing:#5b3623;--top:#e9d2a8;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg>
+        <h3>Celebrations</h3>
+        <p>Farewells, housewarmings, baby showers and milestone moments, planned to the occasion.</p>
+        <a class="text-link" href="https://wa.me/919604799693?text=Hi%20Neha%2C%20I%27d%20like%20a%20cake%20for%20a%20celebration." target="_blank" rel="noopener">Plan a celebration cake</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker">Gallery</p>
+      <h2>Recent work and bakes.</h2>
+      <p>For the latest cakes and behind-the-scenes moments, follow the bakery on Instagram.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="tile" style="--bg:#eadccd" role="img" aria-label="Illustration of a chocolate cake"><svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#8b5a3c;--filling:#4a2a1c;--icing:#5b3623;--top:#d9b38c;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg></div>
+      <div class="tile" style="--bg:#f3e2da" role="img" aria-label="Illustration of a berry-topped cake"><svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#e9d3b0;--filling:#f6eee2;--icing:#f3e6d6;--top:#b8414f;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg></div>
+      <div class="tile" style="--bg:#efe4d6" role="img" aria-label="Illustration of a coffee-dusted cake"><svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#d2a574;--filling:#f2eae0;--icing:#f7f0e6;--top:#6b4129;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg></div>
+      <div class="tile" style="--bg:#e6dacd" role="img" aria-label="Illustration of a golden butter cake"><svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#e3b87f;--filling:#f3dcb8;--icing:#fbf1e3;--top:#c99a6e;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg></div>
+      <div class="tile" style="--bg:#f1e3e0" role="img" aria-label="Illustration of a pink celebration cake"><svg class="cake-art" viewBox="0 0 240 200" style="--sponge:#f0c9a8;--filling:#e89fa0;--icing:#fbf1e8;--top:#c2415a;--plate:#e0d2c2" aria-hidden="true"><use href="#cake"/></svg></div>
+      <a class="tile tile-cta" href="https://www.instagram.com/nehasbakery/" target="_blank" rel="noopener">
+        <h3>See more on Instagram</h3>
+        <p>@nehasbakery</p>
+        <span class="text-link">Open Instagram ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CUSTOM CAKE ENQUIRY ============ -->
+<section class="section tint" id="custom">
+  <div class="container custom-grid">
+    <div class="custom-copy">
+      <p class="kicker">Custom cakes</p>
+      <h2>Tell us the idea. We'll shape the cake.</h2>
+      <p>Share the occasion, date, number of guests and any flavour or design ideas. The form opens a WhatsApp message to the bakery with your details already filled in, so you can review and send it.</p>
+      <p>For urgent orders or design references, send a photo on WhatsApp after you submit.</p>
+    </div>
+    <form class="enquiry" id="custom-form" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone <span class="opt">(optional)</span></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-occasion">Occasion</label>
+          <select id="f-occasion" name="occasion" required>
+            <option value="">Choose one</option>
+            <option>Birthday</option>
+            <option>Anniversary</option>
+            <option>Celebration or other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-date">Date needed</label>
+          <input id="f-date" name="date" type="date" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-servings">Approximate servings <span class="opt">(optional)</span></label>
+        <input id="f-servings" name="servings" type="text" inputmode="numeric" placeholder="For example, 15">
+      </div>
+      <div class="field">
+        <label for="f-ideas">Flavours, design and notes</label>
+        <textarea id="f-ideas" name="ideas" placeholder="Favourite flavours, theme, colours, dietary needs"></textarea>
+      </div>
+      <button class="btn" type="submit">Send enquiry on WhatsApp</button>
+      <p class="fine" id="form-status" role="status" aria-live="polite">Nothing is sent until you press send on WhatsApp.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker" style="color:#e6b9a6">Contact</p>
+      <h2>Let's plan something sweet.</h2>
+      <p>Message the bakery directly on WhatsApp, or follow along on Instagram.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="label">WhatsApp</span>
+        <strong>+91 96047 99693</strong>
+        <a href="https://wa.me/919604799693?text=Hi%20Neha%27s%20Bakery%2C%20I%27d%20like%20to%20make%20an%20enquiry." target="_blank" rel="noopener">Open WhatsApp chat ↗</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">Instagram</span>
+        <strong>@nehasbakery</strong>
+        <a href="https://www.instagram.com/nehasbakery/" target="_blank" rel="noopener">Follow on Instagram ↗</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">Location</span>
+        <strong>Pune, Maharashtra, India</strong>
+        <span class="label">Orders are planned in advance.</span>
+      </div>
+    </div>
+    <div class="contact-actions">
+      <a class="btn" href="https://wa.me/919604799693?text=Hi%20Neha%27s%20Bakery%2C%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/nehasbakery/" target="_blank" rel="noopener">View Instagram</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="monogram" aria-hidden="true">N</span>
+        <div>
+          <strong style="font-family:var(--serif);font-weight:500;font-size:20px">Neha's Bakery</strong>
+          <p>Customised cakes and desserts, made to order in Pune.</p>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#menu">Menu</a>
+        <a href="#custom">Custom cakes</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.instagram.com/nehasbakery/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/919604799693" target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span class="demo-note">Unofficial website demo</span>
+      <span>This is an independent concept preview. It is not the official website of Neha's Bakery and has not been approved by Neha Bhalotia.</span>
+      <span class="credit">Website concept crafted by <a href="#top">AetherDesign</a></span>
+    </div>
+    <p class="small" style="margin-top:14px">© <span id="year">2026</span> Neha's Bakery concept preview.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Header shadow after scrolling
+  var header = document.getElementById("site-header");
+  function onScroll() { header.classList.toggle("is-scrolled", window.scrollY > 8); }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu
+  var toggle = document.getElementById("menu-toggle");
+  var panel = document.getElementById("mobile-nav");
+  function setMenu(open) {
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    panel.hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  toggle.addEventListener("click", function () { setMenu(panel.hidden); });
+  panel.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () { setMenu(false); });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !panel.hidden) { setMenu(false); toggle.focus(); }
+  });
+  window.matchMedia("(min-width: 861px)").addEventListener("change", function (mq) {
+    if (mq.matches) setMenu(false);
+  });
+
+  // Custom cake enquiry: builds a prefilled WhatsApp message. Nothing is stored or sent by this page.
+  var form = document.getElementById("custom-form");
+  var status = document.getElementById("form-status");
+  var dateInput = document.getElementById("f-date");
+  var today = new Date();
+  dateInput.min = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = form.name.value.trim();
+    var occasion = form.occasion.value;
+    var date = form.date.value;
+    var invalid = [];
+    if (!name) invalid.push("your name");
+    if (!occasion) invalid.push("an occasion");
+    if (!date) invalid.push("a date");
+    if (invalid.length) {
+      status.textContent = "Please add " + invalid.join(", ") + ".";
+      status.style.color = "#7c2f3d";
+      (!name ? form.name : !occasion ? form.occasion : form.date).focus();
+      return;
+    }
+    var lines = [
+      "Hi Neha, I'd like to enquire about a custom cake.",
+      "",
+      "Name: " + name,
+      form.phone.value.trim() ? "Phone: " + form.phone.value.trim() : null,
+      "Occasion: " + occasion,
+      "Date needed: " + date,
+      form.servings.value.trim() ? "Approximate servings: " + form.servings.value.trim() : null,
+      form.ideas.value.trim() ? "Flavours, design and notes: " + form.ideas.value.trim() : null
+    ].filter(function (l) { return l !== null; });
+    var url = "https://wa.me/919604799693?text=" + encodeURIComponent(lines.join("\n"));
+    status.style.color = "";
+    status.textContent = "Opening WhatsApp with your enquiry. Review it before you send.";
+    window.open(url, "_blank", "noopener");
+  });
+
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
